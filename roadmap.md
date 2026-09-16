@@ -9,4 +9,4 @@
 - [x] Floating reviews
 - [x] Booking calculator
 - [x] Footer
-- [ ] Validate interactions and responsive layout
+- [x] Validate interactions and responsive layout
