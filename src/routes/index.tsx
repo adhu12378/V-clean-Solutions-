@@ -109,7 +109,7 @@ function scrollTo(id: string) {
 function VCleanPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [serviceDetail, setServiceDetail] = useState<Service | null>(null);
-  const [selectedService, setSelectedService] = useState(services[0]);
+  const [selectedService, setSelectedService] = useState<Service>(services[0] ?? { name: "Residential Cleaning", short: "A reliable reset for calm, comfortable homes.", rate: 22, icon: Sparkles, frequency: "Weekly or fortnightly", checklist: [] });
   const [hours, setHours] = useState(3);
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [postcode, setPostcode] = useState("");
@@ -156,7 +156,7 @@ function VCleanPage() {
           </button>
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
             {[ ["Services", "services"], ["Why Us", "why-us"], ["Before/After", "results"], ["Areas", "areas"], ["Reviews", "reviews"], ["Book Now", "book"] ].map(([label, id]) => (
-              <button key={id} onClick={() => scrollTo(id)} className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">{label}</button>
+              <button key={id} onClick={() => scrollTo(id ?? "home")} className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">{label}</button>
             ))}
           </nav>
           <div className="hidden items-center gap-3 xl:flex">
@@ -165,7 +165,7 @@ function VCleanPage() {
           </div>
           <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen ? <X /> : <Menu />}</Button>
         </div>
-        {menuOpen && <nav className="border-t border-border bg-background px-5 py-5 lg:hidden">{[["Services", "services"], ["Why Us", "why-us"], ["Before/After", "results"], ["Areas", "areas"], ["Reviews", "reviews"], ["Book Now", "book"]].map(([label, id]) => <button key={id} onClick={() => { scrollTo(id); setMenuOpen(false); }} className="block w-full border-b border-border py-3 text-left font-semibold">{label}</button>)}</nav>}
+        {menuOpen && <nav className="border-t border-border bg-background px-5 py-5 lg:hidden">{[["Services", "services"], ["Why Us", "why-us"], ["Before/After", "results"], ["Areas", "areas"], ["Reviews", "reviews"], ["Book Now", "book"]].map(([label, id]) => <button key={id} onClick={() => { scrollTo(id ?? "home"); setMenuOpen(false); }} className="block w-full border-b border-border py-3 text-left font-semibold">{label}</button>)}</nav>}
       </header>
 
       <section id="home" className="relative bg-hero pt-32 pb-24 text-primary-foreground md:pt-40 md:pb-32">
