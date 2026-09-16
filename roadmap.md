@@ -10,7 +10,7 @@
 - [x] Booking calculator
 - [x] Footer
 - [x] Validate interactions and responsive layout
-- [ ] Apply Dark Modern Luxe palette across all sections
-- [ ] Isolate and add the official logo to navigation and footer
-- [ ] Create the official logo favicon
-- [ ] Validate updated desktop and mobile contrast
+- [x] Apply Dark Modern Luxe palette across all sections
+- [x] Isolate and add the official logo to navigation and footer
+- [x] Create the official logo favicon
+- [x] Validate updated desktop and mobile contrast
