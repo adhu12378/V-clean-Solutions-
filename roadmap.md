@@ -14,3 +14,4 @@
 - [x] Isolate and add the official logo to navigation and footer
 - [x] Create the official logo favicon
 - [x] Validate updated desktop and mobile contrast
+- [ ] Restyle the complete site to the approved near-black premium direction while preserving all content and flows
