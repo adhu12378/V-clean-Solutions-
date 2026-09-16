@@ -27,6 +27,7 @@ import kitchen from "@/assets/vclean-kitchen.jpg";
 import office from "@/assets/vclean-office.jpg";
 import bathroomBefore from "@/assets/vclean-bathroom-before.jpg";
 import bathroomAfter from "@/assets/vclean-bathroom-after.jpg";
+import officialLogo from "@/assets/vclean-official-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -150,9 +151,8 @@ function VCleanPage() {
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
       <header className="fixed inset-x-0 top-0 z-40 border-b border-border/70 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
-          <button className="flex items-center gap-3" onClick={() => scrollTo("home")} aria-label="VClean Solutions home">
-            <BrandMark />
-            <span className="leading-none"><strong className="block font-display text-lg">VClean</strong><span className="text-[10px] font-semibold uppercase text-muted-foreground">Solutions</span></span>
+          <button className="flex items-center" onClick={() => scrollTo("home")} aria-label="VClean Solutions home">
+            <BrandLogo className="h-12 w-[138px]" />
           </button>
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
             {[ ["Services", "services"], ["Why Us", "why-us"], ["Before/After", "results"], ["Areas", "areas"], ["Reviews", "reviews"], ["Book Now", "book"] ].map(([label, id]) => (
@@ -251,7 +251,7 @@ function VCleanPage() {
         </div>
       </section>
 
-      <footer className="bg-ink py-16 text-primary-foreground"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="grid gap-10 border-b border-primary-foreground/15 pb-12 md:grid-cols-2 lg:grid-cols-4"><div><div className="flex items-center gap-3"><BrandMark /><strong className="font-display text-xl">VClean Solutions</strong></div><p className="mt-5 max-w-xs text-sm leading-6 text-primary-foreground/60">Professional cleaning for homes and workplaces. Every space, wiped spotless.</p><div className="mt-5 flex items-center gap-2 text-gold"><Stars /><span className="text-xs text-primary-foreground/60">4.9 from 280+ reviews</span></div></div><FooterGroup title="Contact"><a href="tel:+447429099670"><Phone />+44 7429 099670</a><a href="mailto:vcleansolutions.co@gmail.com"><Mail />vcleansolutions.co@gmail.com</a><span><MapPin />Luton, Bedfordshire, UK</span></FooterGroup><FooterGroup title="Opening hours"><span><Clock3 />Mon – Sun</span><span className="pl-6">9:00 AM – 6:00 PM</span><span><BadgeCheck />Replies within 24 hours</span></FooterGroup><FooterGroup title="Service areas"><span>Bedfordshire</span><span>Buckinghamshire</span><span>Hertfordshire</span></FooterGroup></div><div className="flex flex-col justify-between gap-3 pt-7 text-xs text-primary-foreground/45 sm:flex-row"><span>© 2026 VClean Solutions. All rights reserved.</span><span>Vetted crews · Fully insured · Satisfaction guaranteed</span></div></div></footer>
+      <footer className="bg-ink py-16 text-primary-foreground"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="grid gap-10 border-b border-primary-foreground/15 pb-12 md:grid-cols-2 lg:grid-cols-4"><div><BrandLogo className="h-20 w-[230px]" /><p className="mt-5 max-w-xs text-sm leading-6 text-primary-foreground/60">Professional cleaning for homes and workplaces. Every space, wiped spotless.</p><div className="mt-5 flex items-center gap-2 text-gold"><Stars /><span className="text-xs text-primary-foreground/60">4.9 from 280+ reviews</span></div></div><FooterGroup title="Contact"><a href="tel:+447429099670"><Phone />+44 7429 099670</a><a href="mailto:vcleansolutions.co@gmail.com"><Mail />vcleansolutions.co@gmail.com</a><span><MapPin />Luton, Bedfordshire, UK</span></FooterGroup><FooterGroup title="Opening hours"><span><Clock3 />Mon – Sun</span><span className="pl-6">9:00 AM – 6:00 PM</span><span><BadgeCheck />Replies within 24 hours</span></FooterGroup><FooterGroup title="Service areas"><span>Bedfordshire</span><span>Buckinghamshire</span><span>Hertfordshire</span></FooterGroup></div><div className="flex flex-col justify-between gap-3 pt-7 text-xs text-primary-foreground/45 sm:flex-row"><span>© 2026 VClean Solutions. All rights reserved.</span><span>Vetted crews · Fully insured · Satisfaction guaranteed</span></div></div></footer>
 
       {serviceDetail && <div className="fixed inset-0 z-50 grid place-items-center bg-overlay p-4" role="dialog" aria-modal="true" aria-labelledby="service-title" onMouseDown={(e) => e.currentTarget === e.target && setServiceDetail(null)}><div className="relative w-full max-w-xl rounded-lg bg-card p-7 shadow-2xl sm:p-9"><Button variant="ghost" size="icon" className="absolute right-4 top-4" onClick={() => setServiceDetail(null)} aria-label="Close service details"><X /></Button><p className="section-eyebrow">From £{serviceDetail.rate} / hour</p><h2 id="service-title" className="mt-3 pr-10 font-display text-3xl">{serviceDetail.name}</h2><p className="mt-3 text-muted-foreground">{serviceDetail.short}</p><div className="mt-7 rounded-md bg-soft p-5"><p className="text-xs font-bold uppercase text-muted-foreground">Every clean includes</p><ul className="mt-4 grid gap-3 sm:grid-cols-2">{serviceDetail.checklist.map((item) => <li key={item} className="flex items-center gap-2 text-sm"><CheckCircle2 className="size-4 text-accent" />{item}</li>)}</ul></div><p className="mt-5 flex items-center gap-2 text-sm"><CalendarDays className="size-4 text-accent" /><strong>Recommended:</strong> {serviceDetail.frequency}</p><Button size="lg" className="mt-7 w-full" onClick={() => selectForBooking(serviceDetail)}>Select for booking <ArrowRight /></Button></div></div>}
 
@@ -260,7 +260,7 @@ function VCleanPage() {
   );
 }
 
-function BrandMark() { return <span className="relative grid size-10 place-items-center rounded-md bg-accent text-accent-foreground"><Sparkles className="size-5" /><span className="absolute -right-1 -top-1 size-3 rounded-full border-2 border-current bg-mint" /></span>; }
+function BrandLogo({ className }: { className: string }) { return <span className={`block overflow-hidden rounded-sm bg-primary-foreground/95 p-1 ${className}`}><img src={officialLogo.url} alt="VClean Solutions" className="h-full w-full object-contain" /></span>; }
 
 function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy: string }) { return <div className="max-w-2xl"><p className="section-eyebrow">{eyebrow}</p><h2 className="mt-4 font-display text-4xl leading-tight sm:text-5xl">{title}</h2><p className="mt-4 max-w-xl leading-7 text-muted-foreground">{copy}</p></div>; }
 
