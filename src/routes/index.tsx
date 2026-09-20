@@ -27,7 +27,7 @@ import kitchen from "@/assets/vclean-kitchen.jpg";
 import office from "@/assets/vclean-office.jpg";
 import bathroomBefore from "@/assets/vclean-bathroom-before.jpg";
 import bathroomAfter from "@/assets/vclean-bathroom-after.jpg";
-import officialLogo from "@/assets/vclean-official-logo.png.asset.json";
+import officialLogo from "@/assets/vclean-logo-dark-theme.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -260,7 +260,7 @@ function VCleanPage() {
   );
 }
 
-function BrandLogo({ className }: { className: string }) { return <span className={`block overflow-hidden rounded-sm bg-primary-foreground/95 p-1 ${className}`}><img src={officialLogo.url} alt="VClean Solutions" className="h-full w-full object-contain" /></span>; }
+function BrandLogo({ className }: { className: string }) { return <span className={`block overflow-hidden ${className}`}><img src={officialLogo} alt="VClean Solutions" className="h-full w-full object-contain object-left" /></span>; }
 
 function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy: string }) { return <div className="max-w-2xl"><p className="section-eyebrow">{eyebrow}</p><h2 className="mt-4 font-display text-4xl leading-tight sm:text-5xl">{title}</h2><p className="mt-4 max-w-xl leading-7 text-muted-foreground">{copy}</p></div>; }
 

@@ -15,3 +15,4 @@
 - [x] Create the official logo favicon
 - [x] Validate updated desktop and mobile contrast
 - [x] Restyle the complete site to the approved near-black premium direction while preserving all content and flows
+- [x] Recolour the official logo to match the site palette and remove its contrasting background panel
