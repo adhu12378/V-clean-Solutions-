@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -41,7 +41,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "VClean Solutions | Every space, wiped spotless." },
       {
         property: "og:description",
-        content: "Professional cleaning from £25 per hour across Bedfordshire, Buckinghamshire and Hertfordshire.",
+        content: "Professional cleaning with tailored quotes across Bedfordshire, Buckinghamshire and Hertfordshire.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -53,30 +53,29 @@ export const Route = createFileRoute("/")({
 type Service = {
   name: string;
   short: string;
-  rate: number;
   icon: typeof Sparkles;
   frequency: string;
   checklist: string[];
 };
 
 const services: Service[] = [
-  { name: "Residential Cleaning", short: "A reliable reset for calm, comfortable homes.", rate: 22, icon: Sparkles, frequency: "Weekly or fortnightly", checklist: ["Kitchen surfaces & appliances", "Bathrooms sanitised", "Dusting throughout", "Vacuuming & mopping", "Bins emptied"] },
-  { name: "Office & Commercial", short: "Quietly thorough care for productive workplaces.", rate: 26, icon: Building2, frequency: "Daily or weekly", checklist: ["Desks & shared surfaces", "Kitchens & washrooms", "Floors & entrance areas", "Touchpoint disinfection", "Waste removal"] },
-  { name: "Deep Cleaning", short: "A meticulous, room-by-room top-to-bottom clean.", rate: 28, icon: ShieldCheck, frequency: "Every 3–6 months", checklist: ["Skirting & door frames", "Inside cupboards", "Limescale treatment", "Behind movable furniture", "Detailed kitchen degrease"] },
-  { name: "Move-In / Move-Out", short: "Leave one home beautifully and enter the next fresh.", rate: 30, icon: ArrowRight, frequency: "At every move", checklist: ["Inside cupboards & wardrobes", "Appliance interiors", "Fixtures & fittings", "Complete floor care", "Final inspection"] },
-  { name: "Carpet & Upholstery", short: "Fabric-safe extraction that revives every fibre.", rate: 32, icon: Sparkles, frequency: "Every 6–12 months", checklist: ["Pre-treatment", "Spot stain treatment", "Hot water extraction", "Deodorising", "Fabric-safe finish"] },
-  { name: "Window Cleaning", short: "Streak-free clarity, inside and out.", rate: 24, icon: Sparkles, frequency: "Every 4–8 weeks", checklist: ["Interior glass", "Exterior glass", "Frames & sills", "Streak-free polish", "Accessible skylights"] },
-  { name: "Post-Construction", short: "Fine-detail finishing after the builders leave.", rate: 32, icon: Building2, frequency: "After renovation", checklist: ["Fine dust removal", "Paint spot treatment", "Cabinet interiors", "Glass & frames", "Full floor clean"] },
-  { name: "Disinfection & Turnover", short: "Fast, hygienic resets between guests or tenants.", rate: 28, icon: Leaf, frequency: "Every turnover", checklist: ["High-touch disinfection", "Kitchen & bathroom reset", "Linen change", "Supply check", "Photo-ready finish"] },
+  { name: "Residential Cleaning", short: "A reliable reset for calm, comfortable homes.", icon: Sparkles, frequency: "Weekly or fortnightly", checklist: ["Kitchen surfaces & appliances", "Bathrooms sanitised", "Dusting throughout", "Vacuuming & mopping", "Bins emptied"] },
+  { name: "Office & Commercial", short: "Quietly thorough care for productive workplaces.", icon: Building2, frequency: "Daily or weekly", checklist: ["Desks & shared surfaces", "Kitchens & washrooms", "Floors & entrance areas", "Touchpoint disinfection", "Waste removal"] },
+  { name: "Deep Cleaning", short: "A meticulous, room-by-room top-to-bottom clean.", icon: ShieldCheck, frequency: "Every 3–6 months", checklist: ["Skirting & door frames", "Inside cupboards", "Limescale treatment", "Behind movable furniture", "Detailed kitchen degrease"] },
+  { name: "Move-In / Move-Out", short: "Leave one home beautifully and enter the next fresh.", icon: ArrowRight, frequency: "At every move", checklist: ["Inside cupboards & wardrobes", "Appliance interiors", "Fixtures & fittings", "Complete floor care", "Final inspection"] },
+  { name: "Carpet & Upholstery", short: "Fabric-safe extraction that revives every fibre.", icon: Sparkles, frequency: "Every 6–12 months", checklist: ["Pre-treatment", "Spot stain treatment", "Hot water extraction", "Deodorising", "Fabric-safe finish"] },
+  { name: "Window Cleaning", short: "Streak-free clarity, inside and out.", icon: Sparkles, frequency: "Every 4–8 weeks", checklist: ["Interior glass", "Exterior glass", "Frames & sills", "Streak-free polish", "Accessible skylights"] },
+  { name: "Post-Construction", short: "Fine-detail finishing after the builders leave.", icon: Building2, frequency: "After renovation", checklist: ["Fine dust removal", "Paint spot treatment", "Cabinet interiors", "Glass & frames", "Full floor clean"] },
+  { name: "Disinfection & Turnover", short: "Fast, hygienic resets between guests or tenants.", icon: Leaf, frequency: "Every turnover", checklist: ["High-touch disinfection", "Kitchen & bathroom reset", "Linen change", "Supply check", "Photo-ready finish"] },
 ];
 
 const addOns = [
-  ["Oven Deep Scrub", 35],
-  ["Fridge & Freezer", 25],
-  ["Interior Windows", 30],
-  ["Carpet Steam", 40],
-  ["Balcony", 25],
-  ["Hypoallergenic Eco Kit", 10],
+  "Oven Deep Scrub",
+  "Fridge & Freezer",
+  "Interior Windows",
+  "Carpet Steam",
+  "Balcony",
+  "Hypoallergenic Eco Kit",
 ] as const;
 
 const reviews = [
@@ -91,7 +90,7 @@ const features = [
   { icon: BadgeCheck, title: "Vetted & insured", text: "DBS-checked cleaners you can trust in your space." },
   { icon: Leaf, title: "Kinder products", text: "100% eco-friendly, hypoallergenic cleaning options." },
   { icon: HeartHandshake, title: "Our promise", text: "Not delighted? We return and re-clean for free." },
-  { icon: ShieldCheck, title: "Clear pricing", text: "Transparent hourly rates with zero hidden fees." },
+  { icon: ShieldCheck, title: "Tailored quotes", text: "Message us for a clear quote with zero hidden fees." },
   { icon: CalendarDays, title: "Built around you", text: "One-off or recurring cleans, seven days a week." },
 ];
 
@@ -110,7 +109,7 @@ function scrollTo(id: string) {
 function VCleanPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [serviceDetail, setServiceDetail] = useState<Service | null>(null);
-  const [selectedService, setSelectedService] = useState<Service>(services[0] ?? { name: "Residential Cleaning", short: "A reliable reset for calm, comfortable homes.", rate: 22, icon: Sparkles, frequency: "Weekly or fortnightly", checklist: [] });
+  const [selectedService, setSelectedService] = useState<Service>(services[0] ?? { name: "Residential Cleaning", short: "A reliable reset for calm, comfortable homes.", icon: Sparkles, frequency: "Weekly or fortnightly", checklist: [] });
   const [hours, setHours] = useState(3);
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [postcode, setPostcode] = useState("");
@@ -118,11 +117,6 @@ function VCleanPage() {
   const [reveal, setReveal] = useState(52);
   const [revealPreset, setRevealPreset] = useState(revealPresets[1]);
   const [confirmed, setConfirmed] = useState(false);
-
-  const total = useMemo(() => {
-    const extras = addOns.filter(([name]) => selectedAddOns.includes(name)).reduce((sum, [, price]) => sum + price, 0);
-    return selectedService.rate * hours + extras;
-  }, [selectedService, hours, selectedAddOns]);
 
   const checkPostcode = (value = postcode) => {
     const normalised = value.trim().toUpperCase().replace(/\s/g, "");
@@ -188,7 +182,7 @@ function VCleanPage() {
             </div>
           </div>
           <div className="mt-16 grid grid-cols-2 gap-3 md:grid-cols-4">
-            {[["4.9★", "average rating"], ["280+", "verified reviews"], ["100%", "satisfaction guarantee"], ["£25/hr", "starting rate"]].map(([value, label]) => <div key={label} className="glass-panel rounded-lg px-5 py-5"><strong className="font-display text-3xl text-accent">{value}</strong><span className="mt-1 block text-xs uppercase text-primary-foreground/55">{label}</span></div>)}
+            {[["4.9★", "average rating"], ["280+", "verified reviews"], ["100%", "satisfaction guarantee"], ["DM", "for a tailored quote"]].map(([value, label]) => <div key={label} className="glass-panel rounded-lg px-5 py-5"><strong className="font-display text-3xl text-accent">{value}</strong><span className="mt-1 block text-xs uppercase text-primary-foreground/55">{label}</span></div>)}
           </div>
         </div>
       </section>
@@ -203,9 +197,9 @@ function VCleanPage() {
 
       <section id="services" className="scroll-mt-20 bg-soft py-24">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><SectionHeading eyebrow="Services & pricing" title="Precisely the clean you need." copy="Clear hourly rates, thoughtful service, zero surprises." /><p className="rounded-md border border-border bg-card px-4 py-3 text-sm"><span className="text-muted-foreground">General services start from</span> <strong className="text-primary">£25 per hour</strong></p></div>
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><SectionHeading eyebrow="Our services" title="Precisely the clean you need." copy="Thoughtful service tailored to your space, schedule and needs." /><p className="rounded-md border border-border bg-card px-4 py-3 text-sm"><span className="text-muted-foreground">Need a tailored price?</span> <strong className="ml-1 text-primary">DM for quote</strong></p></div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((service, index) => { const Icon = service.icon; return <article key={service.name} className="glass-panel group flex min-h-72 flex-col rounded-lg p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/40"><div className="flex items-start justify-between"><span className="grid size-11 place-items-center rounded-md bg-primary text-primary-foreground"><Icon /></span><span className="text-xs font-bold text-muted-foreground">0{index + 1}</span></div><h3 className="mt-8 font-display text-xl">{service.name}</h3><p className="mt-3 flex-1 text-sm leading-6 text-muted-foreground">{service.short}</p><div className="mt-6 flex items-center justify-between border-t border-border pt-4"><span><strong className="font-display text-2xl">£{service.rate}</strong><small className="text-muted-foreground"> /hr</small></span><Button variant="ghost" size="icon" onClick={() => setServiceDetail(service)} aria-label={`View ${service.name} details`}><ChevronRight /></Button></div></article>; })}
+            {services.map((service, index) => { const Icon = service.icon; return <article key={service.name} className="glass-panel group flex min-h-72 flex-col rounded-lg p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/40"><div className="flex items-start justify-between"><span className="grid size-11 place-items-center rounded-md bg-primary text-primary-foreground"><Icon /></span><span className="text-xs font-bold text-muted-foreground">0{index + 1}</span></div><h3 className="mt-8 font-display text-xl">{service.name}</h3><p className="mt-3 flex-1 text-sm leading-6 text-muted-foreground">{service.short}</p><div className="mt-6 flex items-center justify-between border-t border-border pt-4"><strong className="font-display text-lg text-accent">DM for quote</strong><Button variant="ghost" size="icon" onClick={() => setServiceDetail(service)} aria-label={`View ${service.name} details`}><ChevronRight /></Button></div></article>; })}
           </div>
         </div>
       </section>
@@ -236,26 +230,26 @@ function VCleanPage() {
       </section>
 
       <section id="book" className="scroll-mt-20 bg-background py-24">
-        <div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading eyebrow="Instant quote" title="Your spotless space starts here." copy="Tell us what you need and see your estimate update instantly." />
+        <div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading eyebrow="Request a quote" title="Your spotless space starts here." copy="Tell us what you need and we’ll contact you with a tailored quote." />
           <form onSubmit={submitBooking} className="glass-panel mt-12 grid overflow-hidden rounded-lg lg:grid-cols-[1fr_340px]">
             <div className="space-y-10 p-5 sm:p-9">
-              <FormStep number="01" title="Choose a service"><div className="grid gap-3 sm:grid-cols-2">{services.map((service) => <label key={service.name} className={`cursor-pointer rounded-md border p-4 transition ${selectedService.name === service.name ? "border-primary bg-primary text-primary-foreground" : "border-border hover:border-accent"}`}><input type="radio" name="service" value={service.name} checked={selectedService.name === service.name} onChange={() => setSelectedService(service)} className="sr-only" /><span className="flex items-center justify-between gap-3 text-sm font-semibold"><span>{service.name}</span><span>£{service.rate}/hr</span></span></label>)}</div></FormStep>
+              <FormStep number="01" title="Choose a service"><div className="grid gap-3 sm:grid-cols-2">{services.map((service) => <label key={service.name} className={`cursor-pointer rounded-md border p-4 transition ${selectedService.name === service.name ? "border-primary bg-primary text-primary-foreground" : "border-border hover:border-accent"}`}><input type="radio" name="service" value={service.name} checked={selectedService.name === service.name} onChange={() => setSelectedService(service)} className="sr-only" /><span className="flex items-center justify-between gap-3 text-sm font-semibold"><span>{service.name}</span><span>Quote</span></span></label>)}</div></FormStep>
               <FormStep number="02" title="Property size / estimated time"><div className="grid grid-cols-2 gap-3 sm:grid-cols-4">{[[2, "Studio / small"], [3, "1–2 bedrooms"], [4, "3–4 bedrooms"], [6, "Large / office"]].map(([value, label]) => <label key={value} className={`cursor-pointer rounded-md border p-4 text-center ${hours === value ? "border-accent bg-accent/10" : "border-border"}`}><input type="radio" name="hours" value={value} checked={hours === value} onChange={() => setHours(Number(value))} className="sr-only" /><strong className="block font-display text-xl">{value} hrs</strong><small className="text-muted-foreground">{label}</small></label>)}</div></FormStep>
-              <FormStep number="03" title="Useful add-ons"><div className="grid gap-3 sm:grid-cols-2">{addOns.map(([name, price]) => { const active = selectedAddOns.includes(name); return <label key={name} className={`flex cursor-pointer items-center justify-between rounded-md border p-4 ${active ? "border-accent bg-accent/10" : "border-border"}`}><input type="checkbox" checked={active} onChange={() => setSelectedAddOns(active ? selectedAddOns.filter((item) => item !== name) : [...selectedAddOns, name])} className="sr-only" /><span className="flex items-center gap-3 text-sm font-medium"><span className={`grid size-5 place-items-center rounded-sm border ${active ? "border-accent bg-accent text-accent-foreground" : "border-input"}`}>{active && <Check className="size-3" />}</span>{name}</span><strong>+£{price}</strong></label>; })}</div></FormStep>
+              <FormStep number="03" title="Useful add-ons"><div className="grid gap-3 sm:grid-cols-2">{addOns.map((name) => { const active = selectedAddOns.includes(name); return <label key={name} className={`flex cursor-pointer items-center justify-between rounded-md border p-4 ${active ? "border-accent bg-accent/10" : "border-border"}`}><input type="checkbox" checked={active} onChange={() => setSelectedAddOns(active ? selectedAddOns.filter((item) => item !== name) : [...selectedAddOns, name])} className="sr-only" /><span className="flex items-center gap-3 text-sm font-medium"><span className={`grid size-5 place-items-center rounded-sm border ${active ? "border-accent bg-accent text-accent-foreground" : "border-input"}`}>{active && <Check className="size-3" />}</span>{name}</span><strong className="text-accent">Quote</strong></label>; })}</div></FormStep>
               <FormStep number="04" title="Your address"><div className="grid gap-3 sm:grid-cols-[0.45fr_1fr]"><input required placeholder="Postcode" value={postcode} onChange={(e) => setPostcode(e.target.value)} onBlur={() => postcode && checkPostcode()} className="form-field uppercase" /><input required placeholder="Address line" className="form-field" /></div>{coverage && <p className={`mt-3 flex items-center gap-2 text-sm font-semibold ${coverage.ok ? "text-accent" : "text-destructive"}`}>{coverage.ok ? <CheckCircle2 className="size-4" /> : <MapPin className="size-4" />}{coverage.message}</p>}</FormStep>
               <FormStep number="05" title="Preferred time"><div className="grid gap-3 sm:grid-cols-2"><label><span className="mb-2 block text-xs font-bold uppercase text-muted-foreground">Date</span><input required type="date" className="form-field" /></label><label><span className="mb-2 block text-xs font-bold uppercase text-muted-foreground">Arrival window</span><select required className="form-field"><option>9:00 AM – 11:00 AM</option><option>11:00 AM – 1:00 PM</option><option>1:00 PM – 3:00 PM</option><option>3:00 PM – 5:00 PM</option></select></label></div></FormStep>
               <FormStep number="06" title="Contact details"><div className="grid gap-3 sm:grid-cols-2"><input required name="name" placeholder="Full name" className="form-field" /><input required type="tel" placeholder="Phone number" className="form-field" /><input required type="email" placeholder="Email address" className="form-field sm:col-span-2" /></div></FormStep>
             </div>
-            <aside className="bg-secondary p-6 text-primary-foreground sm:p-8 lg:sticky lg:top-20 lg:h-fit"><p className="text-xs font-bold uppercase text-accent">Your instant estimate</p><h3 className="mt-3 font-display text-2xl">{selectedService.name}</h3><div className="mt-8 space-y-4 border-y border-primary-foreground/15 py-6 text-sm"><p className="flex justify-between"><span className="text-primary-foreground/65">Cleaning time</span><strong>{hours} hours</strong></p><p className="flex justify-between"><span className="text-primary-foreground/65">Hourly rate</span><strong>£{selectedService.rate}</strong></p><p className="flex justify-between"><span className="text-primary-foreground/65">Add-ons</span><strong>{selectedAddOns.length || "None"}</strong></p></div><div className="mt-6 flex items-end justify-between"><span className="text-sm text-primary-foreground/65">Estimated total</span><strong className="font-display text-4xl text-mint">£{total}</strong></div><p className="mt-3 text-xs leading-5 text-primary-foreground/55">Final price is confirmed after we review your booking details.</p><Button type="submit" className="mt-8 h-13 w-full bg-mint text-primary hover:bg-mint/90">Request this clean <ArrowRight /></Button><p className="mt-4 text-center text-xs text-primary-foreground/55">No payment required today</p></aside>
+            <aside className="bg-secondary p-6 text-primary-foreground sm:p-8 lg:sticky lg:top-20 lg:h-fit"><p className="text-xs font-bold uppercase text-accent">Your quote request</p><h3 className="mt-3 font-display text-2xl">{selectedService.name}</h3><div className="mt-8 space-y-4 border-y border-primary-foreground/15 py-6 text-sm"><p className="flex justify-between"><span className="text-primary-foreground/65">Cleaning time</span><strong>{hours} hours</strong></p><p className="flex justify-between"><span className="text-primary-foreground/65">Add-ons</span><strong>{selectedAddOns.length || "None"}</strong></p></div><div className="mt-6"><span className="text-sm text-primary-foreground/65">Pricing</span><strong className="mt-2 block font-display text-3xl text-mint">DM for quote</strong></div><p className="mt-3 text-xs leading-5 text-primary-foreground/55">We’ll review your details and send you a tailored quote.</p><Button type="submit" className="mt-8 h-13 w-full bg-mint text-primary hover:bg-mint/90">Request my quote <ArrowRight /></Button><p className="mt-4 text-center text-xs text-primary-foreground/55">No payment required today</p></aside>
           </form>
         </div>
       </section>
 
       <footer className="border-t border-border bg-ink py-16 text-primary-foreground"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="grid gap-10 border-b border-primary-foreground/15 pb-12 md:grid-cols-2 lg:grid-cols-4"><div><BrandLogo className="h-20 w-[230px]" /><p className="mt-5 max-w-xs text-sm leading-6 text-primary-foreground/60">Professional cleaning for homes and workplaces. Every space, wiped spotless.</p><div className="mt-5 flex items-center gap-2 text-gold"><Stars /><span className="text-xs text-primary-foreground/60">4.9 from 280+ reviews</span></div></div><FooterGroup title="Contact"><a href="tel:+447429099670"><Phone />+44 7429 099670</a><a href="mailto:vcleansolutions.co@gmail.com"><Mail />vcleansolutions.co@gmail.com</a><span><MapPin />Luton, Bedfordshire, UK</span></FooterGroup><FooterGroup title="Opening hours"><span><Clock3 />Mon – Sun</span><span className="pl-6">9:00 AM – 6:00 PM</span><span><BadgeCheck />Replies within 24 hours</span></FooterGroup><FooterGroup title="Service areas"><span>Bedfordshire</span><span>Buckinghamshire</span><span>Hertfordshire</span></FooterGroup></div><div className="flex flex-col justify-between gap-3 pt-7 text-xs text-primary-foreground/45 sm:flex-row"><span>© 2026 VClean Solutions. All rights reserved.</span><span>Vetted crews · Fully insured · Satisfaction guaranteed</span></div></div></footer>
 
-      {serviceDetail && <div className="fixed inset-0 z-50 grid place-items-center bg-overlay p-4" role="dialog" aria-modal="true" aria-labelledby="service-title" onMouseDown={(e) => e.currentTarget === e.target && setServiceDetail(null)}><div className="relative w-full max-w-xl rounded-lg bg-card p-7 shadow-2xl sm:p-9"><Button variant="ghost" size="icon" className="absolute right-4 top-4" onClick={() => setServiceDetail(null)} aria-label="Close service details"><X /></Button><p className="section-eyebrow">From £{serviceDetail.rate} / hour</p><h2 id="service-title" className="mt-3 pr-10 font-display text-3xl">{serviceDetail.name}</h2><p className="mt-3 text-muted-foreground">{serviceDetail.short}</p><div className="mt-7 rounded-md bg-soft p-5"><p className="text-xs font-bold uppercase text-muted-foreground">Every clean includes</p><ul className="mt-4 grid gap-3 sm:grid-cols-2">{serviceDetail.checklist.map((item) => <li key={item} className="flex items-center gap-2 text-sm"><CheckCircle2 className="size-4 text-accent" />{item}</li>)}</ul></div><p className="mt-5 flex items-center gap-2 text-sm"><CalendarDays className="size-4 text-accent" /><strong>Recommended:</strong> {serviceDetail.frequency}</p><Button size="lg" className="mt-7 w-full" onClick={() => selectForBooking(serviceDetail)}>Select for booking <ArrowRight /></Button></div></div>}
+      {serviceDetail && <div className="fixed inset-0 z-50 grid place-items-center bg-overlay p-4" role="dialog" aria-modal="true" aria-labelledby="service-title" onMouseDown={(e) => e.currentTarget === e.target && setServiceDetail(null)}><div className="relative w-full max-w-xl rounded-lg bg-card p-7 shadow-2xl sm:p-9"><Button variant="ghost" size="icon" className="absolute right-4 top-4" onClick={() => setServiceDetail(null)} aria-label="Close service details"><X /></Button><p className="section-eyebrow">DM for quote</p><h2 id="service-title" className="mt-3 pr-10 font-display text-3xl">{serviceDetail.name}</h2><p className="mt-3 text-muted-foreground">{serviceDetail.short}</p><div className="mt-7 rounded-md bg-soft p-5"><p className="text-xs font-bold uppercase text-muted-foreground">Every clean includes</p><ul className="mt-4 grid gap-3 sm:grid-cols-2">{serviceDetail.checklist.map((item) => <li key={item} className="flex items-center gap-2 text-sm"><CheckCircle2 className="size-4 text-accent" />{item}</li>)}</ul></div><p className="mt-5 flex items-center gap-2 text-sm"><CalendarDays className="size-4 text-accent" /><strong>Recommended:</strong> {serviceDetail.frequency}</p><Button size="lg" className="mt-7 w-full" onClick={() => selectForBooking(serviceDetail)}>Select for quote <ArrowRight /></Button></div></div>}
 
-      {confirmed && <div className="fixed inset-0 z-50 grid place-items-center bg-overlay p-4" role="dialog" aria-modal="true" aria-labelledby="confirm-title"><div className="w-full max-w-md rounded-lg bg-card p-8 text-center shadow-2xl"><span className="mx-auto grid size-16 place-items-center rounded-full bg-accent/10 text-accent"><CheckCircle2 className="size-8" /></span><p className="section-eyebrow mt-6">Request received</p><h2 id="confirm-title" className="mt-3 font-display text-3xl">Your clean is nearly booked.</h2><p className="mt-4 leading-7 text-muted-foreground">We’ll contact you within 24 hours to confirm your {selectedService.name.toLowerCase()} and estimated total of £{total}.</p><div className="mt-6 rounded-md bg-soft p-4 text-sm"><strong>{hours} hours · {selectedAddOns.length} add-ons</strong><span className="mt-1 block text-muted-foreground">VClean Solutions, Luton</span></div><Button className="mt-7 w-full" onClick={() => setConfirmed(false)}>Done</Button></div></div>}
+      {confirmed && <div className="fixed inset-0 z-50 grid place-items-center bg-overlay p-4" role="dialog" aria-modal="true" aria-labelledby="confirm-title"><div className="w-full max-w-md rounded-lg bg-card p-8 text-center shadow-2xl"><span className="mx-auto grid size-16 place-items-center rounded-full bg-accent/10 text-accent"><CheckCircle2 className="size-8" /></span><p className="section-eyebrow mt-6">Request received</p><h2 id="confirm-title" className="mt-3 font-display text-3xl">Your quote is on its way.</h2><p className="mt-4 leading-7 text-muted-foreground">We’ll contact you within 24 hours with a tailored quote for your {selectedService.name.toLowerCase()}.</p><div className="mt-6 rounded-md bg-soft p-4 text-sm"><strong>{hours} hours · {selectedAddOns.length} add-ons</strong><span className="mt-1 block text-muted-foreground">VClean Solutions, Luton</span></div><Button className="mt-7 w-full" onClick={() => setConfirmed(false)}>Done</Button></div></div>}
     </main>
   );
 }
