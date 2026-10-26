@@ -1,0 +1,1 @@
+export const WHATSAPP_URL = "https://wa.me/447554462594?text=Hi%20VClean%20Solutions,%20I'd%20like%20to%20inquire%20about%20a%20cleaning%20service";
