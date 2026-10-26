@@ -1,11 +1,12 @@
-import { describe, expect, test } from "bun:test";
+import { describe, it } from "node:test";
+import { strict as assert } from "node:assert";
 import { WHATSAPP_URL } from "./contact";
 
 describe("WhatsApp contact", () => {
-  test("sends enquiries to the requested company number", () => {
-    expect(new URL(WHATSAPP_URL).pathname).toBe("/447554462594");
+  it("sends enquiries to the requested company number", () => {
+    assert.equal(new URL(WHATSAPP_URL).pathname, "/447554462594");
   });
-  test("prepares the requested cleaning enquiry", () => {
-    expect(new URL(WHATSAPP_URL).searchParams.get("text")).toBe("Hi VClean Solutions, I'd like to inquire about a cleaning service");
+  it("prepares the requested cleaning enquiry", () => {
+    assert.equal(new URL(WHATSAPP_URL).searchParams.get("text"), "Hi VClean Solutions, I'd like to inquire about a cleaning service");
   });
 });

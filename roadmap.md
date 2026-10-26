@@ -16,7 +16,7 @@
 - [x] Validate updated desktop and mobile contrast
 - [x] Restyle the complete site to the approved near-black premium direction while preserving all content and flows
 - [x] Recolour the official logo to match the site palette and remove its contrasting background panel
-- [ ] Replace all displayed prices and instant estimates with DM-for-quote messaging
-- [ ] Add WhatsApp links for +44 7554462594 in navigation, footer and floating contact button
-- [ ] Convert the transparent official logo to a dark-mode vector with cyan glow
-- [ ] Verify price-free service details, quote flow and WhatsApp links
+- [x] Replace all displayed prices and instant estimates with DM-for-quote messaging
+- [x] Add WhatsApp links for +44 7554462594 in navigation, footer and floating contact button
+- [x] Convert the transparent official logo to a dark-mode vector with cyan glow
+- [x] Verify price-free service details, quote flow and WhatsApp links
