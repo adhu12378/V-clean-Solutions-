@@ -66,6 +66,7 @@
   --color-soft: var(--soft);
   --color-ink: var(--ink);
   --color-overlay: var(--overlay);
+  --color-whatsapp: var(--whatsapp);
 }
 
 :root {
@@ -94,6 +95,9 @@
   --soft: oklch(0.135 0.012 260 / 90%);
   --ink: oklch(0.075 0.008 260);
   --overlay: oklch(0.065 0.025 260 / 88%);
+  --whatsapp: oklch(0.76 0.2 149);
+  --whatsapp-glow: oklch(0.76 0.2 149 / 25%);
+  --logo-glow: oklch(0.79 0.15 205 / 24%);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -194,6 +198,9 @@ html { scroll-behavior: smooth; }
 .cta-glow:hover { filter: brightness(1.12); box-shadow: 0 14px 38px oklch(0.68 0.19 230 / 38%), inset 0 1px oklch(1 0 0 / 30%); transform: translateY(-1px); }
 .text-electric { background: linear-gradient(100deg, oklch(0.78 0.16 224), oklch(0.86 0.14 192)); color: transparent; background-clip: text; }
 .ambient-stars { background-image: radial-gradient(circle, oklch(0.95 0.02 220 / 45%) 0 1px, transparent 1.5px), radial-gradient(circle, oklch(0.75 0.16 205 / 38%) 0 1px, transparent 1.5px); background-position: 0 0, 29px 41px; background-size: 73px 73px, 97px 97px; }
+.brand-logo-mark { filter: drop-shadow(0 0 5px var(--logo-glow)); }
+.whatsapp-float { box-shadow: 0 0 20px var(--whatsapp-glow); animation: whatsapp-pulse 3s ease-in-out infinite; }
+@keyframes whatsapp-pulse { 50% { box-shadow: 0 0 32px var(--whatsapp-glow); } }
 
 @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes float-one { 50% { transform: translateY(-8px); } }
