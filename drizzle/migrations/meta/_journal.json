@@ -15,6 +15,13 @@
       "when": 1793584285811,
       "tag": "0001_track_enquiry_sheets_copy",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793584332495,
+      "tag": "0002_restrict_enquiry_default_grants",
+      "breakpoints": true
     }
   ]
 }
