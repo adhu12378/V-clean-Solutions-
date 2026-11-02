@@ -14,13 +14,66 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      customer_enquiries: {
+        Row: {
+          add_ons: string[]
+          address: string
+          arrival_window: string
+          created_at: string
+          customer_name: string
+          email: string
+          enquiry_id: string
+          id: string
+          notes: string
+          phone: string
+          postcode: string
+          preferred_date: string
+          property_size_hours: number
+          service_type: string
+          status: string
+        }
+        Insert: {
+          add_ons?: string[]
+          address: string
+          arrival_window: string
+          created_at?: string
+          customer_name: string
+          email: string
+          enquiry_id?: string
+          id?: string
+          notes?: string
+          phone: string
+          postcode: string
+          preferred_date: string
+          property_size_hours: number
+          service_type: string
+          status?: string
+        }
+        Update: {
+          add_ons?: string[]
+          address?: string
+          arrival_window?: string
+          created_at?: string
+          customer_name?: string
+          email?: string
+          enquiry_id?: string
+          id?: string
+          notes?: string
+          phone?: string
+          postcode?: string
+          preferred_date?: string
+          property_size_hours?: number
+          service_type?: string
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      submit_cleaning_enquiry: { Args: { payload: Json }; Returns: string }
     }
     Enums: {
       [_ in never]: never

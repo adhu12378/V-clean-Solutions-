@@ -30,6 +30,8 @@ import bathroomAfter from "@/assets/vclean-bathroom-after.jpg";
 import officialLogo from "@/assets/vclean-logo-dark-theme.svg";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { WHATSAPP_URL } from "@/lib/contact";
+import { useServerFn } from "@tanstack/react-start";
+import { submitEnquiry } from "@/lib/enquiries.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -119,6 +121,10 @@ function VCleanPage() {
   const [reveal, setReveal] = useState(52);
   const [revealPreset, setRevealPreset] = useState(revealPresets[1]);
   const [confirmed, setConfirmed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState("");
+  const [enquiryReference, setEnquiryReference] = useState("");
+  const saveEnquiry = useServerFn(submitEnquiry);
 
   const checkPostcode = (value = postcode) => {
     const normalised = value.trim().toUpperCase().replace(/\s/g, "");
@@ -138,9 +144,26 @@ function VCleanPage() {
     window.setTimeout(() => scrollTo("book"), 100);
   };
 
-  const submitBooking = (event: FormEvent<HTMLFormElement>) => {
+  const submitBooking = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setConfirmed(true);
+    if (submitting) return;
+    const form = new FormData(event.currentTarget);
+    setSubmitting(true);
+    setSubmissionError("");
+    try {
+      const result = await saveEnquiry({ data: {
+        customer_name: form.get("name"), email: form.get("email"), phone: form.get("phone"),
+        postcode, address: form.get("address"), service_type: selectedService.name,
+        property_size_hours: hours, add_ons: selectedAddOns,
+        preferred_date: form.get("preferred_date"), arrival_window: form.get("arrival_window"),
+      } });
+      setEnquiryReference(result.reference);
+      setConfirmed(true);
+    } catch (error) {
+      setSubmissionError(error instanceof Error ? error.message : "We couldn’t save your enquiry. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -158,6 +181,7 @@ function VCleanPage() {
           <div className="flex items-center gap-2 xl:gap-3">
             <a href="tel:+447429099670" className="glass-panel hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold xl:flex"><Phone className="size-4 text-accent" />+44 7429 099670</a>
             <Button asChild variant="outline" size="icon" className="text-whatsapp hover:text-whatsapp" ><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" title="Chat on WhatsApp"><WhatsAppIcon /></a></Button>
+            <Button size="sm" onClick={() => scrollTo("book")}>Enquire Now</Button>
             <Button size="lg" className="hidden xl:inline-flex" asChild><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">DM for quote <ArrowRight /></a></Button>
           </div>
           <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen ? <X /> : <Menu />}</Button>
