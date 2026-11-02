@@ -30,6 +30,7 @@ export type Database = {
           preferred_date: string
           property_size_hours: number
           service_type: string
+          sheets_sync_status: string
           status: string
         }
         Insert: {
@@ -47,6 +48,7 @@ export type Database = {
           preferred_date: string
           property_size_hours: number
           service_type: string
+          sheets_sync_status?: string
           status?: string
         }
         Update: {
@@ -64,6 +66,7 @@ export type Database = {
           preferred_date?: string
           property_size_hours?: number
           service_type?: string
+          sheets_sync_status?: string
           status?: string
         }
         Relationships: []

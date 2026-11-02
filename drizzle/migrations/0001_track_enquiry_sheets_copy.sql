@@ -1,0 +1,1 @@
+ALTER TABLE public.customer_enquiries ADD COLUMN sheets_sync_status text NOT NULL DEFAULT 'pending' CHECK (sheets_sync_status IN ('pending','synced','failed'));
