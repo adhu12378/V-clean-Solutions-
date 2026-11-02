@@ -12,5 +12,14 @@ export const submitEnquiry = createServerFn({ method: "POST" })
       console.error("Enquiry storage failed", error?.code);
       throw new Error("We couldn’t save your enquiry. Please try again or contact us on WhatsApp.");
     }
+    let trackerRecorded = false;
+    try {
+      const { recordEnquiryInSheets } = await import("./enquiry-sheets.server");
+      await recordEnquiryInSheets(reference, data);
+      trackerRecorded = true;
+    } catch (error) {
+      console.error("Enquiry saved, tracker copy failed", error instanceof Error ? error.message : "Unknown failure");
+    }
+    await supabaseAdmin.from("customer_enquiries").update({ sheets_sync_status: trackerRecorded ? "synced" : "failed" }).eq("enquiry_id", reference);
     return { reference };
   });
