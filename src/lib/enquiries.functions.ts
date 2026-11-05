@@ -21,5 +21,12 @@ export const submitEnquiry = createServerFn({ method: "POST" })
       console.error("Enquiry saved, tracker copy failed", error instanceof Error ? error.message : "Unknown failure");
     }
     await supabaseAdmin.from("customer_enquiries").update({ sheets_sync_status: trackerRecorded ? "synced" : "failed" }).eq("enquiry_id", reference);
+    try {
+      const { notifyNewEnquiry } = await import("./enquiry-email.server");
+      const notice = await notifyNewEnquiry(reference, data);
+      await supabaseAdmin.from("customer_enquiries").update({ notification_status: notice.status, notification_error: notice.error }).eq("enquiry_id", reference);
+    } catch {
+      await supabaseAdmin.from("customer_enquiries").update({ notification_status: "failed", notification_error: "Notification service unavailable" }).eq("enquiry_id", reference);
+    }
     return { reference };
   });
