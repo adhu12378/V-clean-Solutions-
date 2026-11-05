@@ -1,0 +1,4 @@
+import { z } from "zod";
+export const statuses = ["new", "contacted", "quoted", "booked", "completed", "cancelled"] as const;
+export const adminUpdateSchema = z.object({ id: z.string().uuid(), status: z.enum(statuses), notes: z.string().max(5000), preferred_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), arrival_window: z.string().min(1).max(100) }).strict();
+export const notificationSchema = z.object({ enabled: z.boolean(), sender_email: z.union([z.literal(""), z.string().email()]), recipient_email: z.string().email() }).refine(value => !value.enabled || value.sender_email !== "", "A verified sender address is required");

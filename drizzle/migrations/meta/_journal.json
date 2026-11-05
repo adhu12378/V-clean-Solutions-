@@ -22,6 +22,20 @@
       "when": 1793584332495,
       "tag": "0002_restrict_enquiry_default_grants",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793893050935,
+      "tag": "0003_admin_profiles_roles_notifications",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793893182301,
+      "tag": "0004_harden_admin_role_lifecycle",
+      "breakpoints": true
     }
   ]
 }

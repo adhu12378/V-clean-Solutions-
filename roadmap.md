@@ -23,8 +23,9 @@
 - [x] Save account-free customer enquiries in Lovable Cloud with unique references and private read access
 - [x] Add header Enquire Now linked to the existing enquiry form
 - [x] Verify a real submission and database security; remove only the test entry
-- [ ] Resend notifications — blocked: connection declined; needs Resend connection and verified sender address
+- [ ] Activate and verify Resend delivery — connected; awaits a verified sender address
 - [x] Create and verify automatic Google Sheets customer tracker copy
-- [ ] Add owner-only /admin sign-in, admin profile, enquiry search, booking and status management
-- [ ] Prepare notification settings and new-enquiry send pipeline; explain Resend domain setup
-- [ ] Verify administrator permissions, updates, and signed-out access
+- [x] Add owner-only /admin sign-in, admin profile, enquiry search, booking and status management
+- [x] Prepare notification settings and new-enquiry send pipeline; explain Resend domain setup
+- [x] Verify database permission rules and signed-out access
+- [ ] Verify advaithsunil2001@gmail.com dashboard access and saved updates — blocked until first verified sign-in; no auth users exist
