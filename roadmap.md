@@ -25,4 +25,6 @@
 - [x] Verify a real submission and database security; remove only the test entry
 - [ ] Resend notifications — blocked: connection declined; needs Resend connection and verified sender address
 - [x] Create and verify automatic Google Sheets customer tracker copy
-- [ ] Website admin dashboard — blocked: needs confirmation of owner-only sign-in and intended admin account; no customer accounts
+- [ ] Add owner-only /admin sign-in, admin profile, enquiry search, booking and status management
+- [ ] Prepare notification settings and new-enquiry send pipeline; explain Resend domain setup
+- [ ] Verify administrator permissions, updates, and signed-out access
