@@ -1,0 +1,26 @@
+CREATE TYPE public.app_role AS ENUM ('admin');
+CREATE TABLE public.user_roles (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE, role public.app_role NOT NULL, UNIQUE(user_id,role));
+REVOKE ALL ON public.user_roles FROM anon,authenticated;
+GRANT SELECT ON public.user_roles TO authenticated; GRANT ALL ON public.user_roles TO service_role;
+ALTER TABLE public.user_roles ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Read own role" ON public.user_roles FOR SELECT TO authenticated USING(user_id=auth.uid());
+CREATE FUNCTION public.has_role(_user_id uuid,_role public.app_role) RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER SET search_path=public AS $$ SELECT EXISTS(SELECT 1 FROM public.user_roles WHERE user_id=_user_id AND role=_role) $$;
+REVOKE ALL ON FUNCTION public.has_role(uuid,public.app_role) FROM PUBLIC; GRANT EXECUTE ON FUNCTION public.has_role(uuid,public.app_role) TO authenticated,service_role;
+CREATE TABLE public.profiles (id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE, display_name text NOT NULL DEFAULT '', avatar_url text NOT NULL DEFAULT '', preferences jsonb NOT NULL DEFAULT '{}');
+REVOKE ALL ON public.profiles FROM anon,authenticated; GRANT SELECT,UPDATE ON public.profiles TO authenticated; GRANT ALL ON public.profiles TO service_role;
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Read own profile" ON public.profiles FOR SELECT TO authenticated USING(id=auth.uid());
+CREATE POLICY "Update own profile" ON public.profiles FOR UPDATE TO authenticated USING(id=auth.uid()) WITH CHECK(id=auth.uid());
+CREATE FUNCTION public.provision_admin_profile() RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path=public AS $$ BEGIN
+ INSERT INTO public.profiles(id) VALUES(NEW.id) ON CONFLICT DO NOTHING;
+ IF lower(NEW.email)='advaithsunil2001@gmail.com' AND NEW.email_confirmed_at IS NOT NULL THEN INSERT INTO public.user_roles(user_id,role) VALUES(NEW.id,'admin') ON CONFLICT DO NOTHING; END IF;
+ RETURN NEW; END $$;
+CREATE TRIGGER provision_vclean_admin AFTER INSERT OR UPDATE OF email_confirmed_at ON auth.users FOR EACH ROW EXECUTE FUNCTION public.provision_admin_profile();
+GRANT SELECT,UPDATE ON public.customer_enquiries TO authenticated;
+CREATE POLICY "Admins read enquiries" ON public.customer_enquiries FOR SELECT TO authenticated USING(public.has_role(auth.uid(),'admin'));
+CREATE POLICY "Admins update enquiries" ON public.customer_enquiries FOR UPDATE TO authenticated USING(public.has_role(auth.uid(),'admin')) WITH CHECK(public.has_role(auth.uid(),'admin'));
+CREATE TABLE public.notification_settings (id boolean PRIMARY KEY DEFAULT true CHECK(id), enabled boolean NOT NULL DEFAULT false, sender_email text NOT NULL DEFAULT '', recipient_email text NOT NULL DEFAULT 'advaithsunil2001@gmail.com');
+REVOKE ALL ON public.notification_settings FROM anon,authenticated; GRANT SELECT,INSERT,UPDATE ON public.notification_settings TO authenticated; GRANT ALL ON public.notification_settings TO service_role;
+ALTER TABLE public.notification_settings ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Admins manage notification settings" ON public.notification_settings FOR ALL TO authenticated USING(public.has_role(auth.uid(),'admin')) WITH CHECK(public.has_role(auth.uid(),'admin'));
+ALTER TABLE public.customer_enquiries ADD COLUMN notification_status text NOT NULL DEFAULT 'not_configured', ADD COLUMN notification_error text NOT NULL DEFAULT '';

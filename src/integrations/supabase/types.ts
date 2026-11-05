@@ -25,6 +25,8 @@ export type Database = {
           enquiry_id: string
           id: string
           notes: string
+          notification_error: string
+          notification_status: string
           phone: string
           postcode: string
           preferred_date: string
@@ -43,6 +45,8 @@ export type Database = {
           enquiry_id?: string
           id?: string
           notes?: string
+          notification_error?: string
+          notification_status?: string
           phone: string
           postcode: string
           preferred_date: string
@@ -61,6 +65,8 @@ export type Database = {
           enquiry_id?: string
           id?: string
           notes?: string
+          notification_error?: string
+          notification_status?: string
           phone?: string
           postcode?: string
           preferred_date?: string
@@ -71,15 +77,82 @@ export type Database = {
         }
         Relationships: []
       }
+      notification_settings: {
+        Row: {
+          enabled: boolean
+          id: boolean
+          recipient_email: string
+          sender_email: string
+        }
+        Insert: {
+          enabled?: boolean
+          id?: boolean
+          recipient_email?: string
+          sender_email?: string
+        }
+        Update: {
+          enabled?: boolean
+          id?: boolean
+          recipient_email?: string
+          sender_email?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string
+          display_name: string
+          id: string
+          preferences: Json
+        }
+        Insert: {
+          avatar_url?: string
+          display_name?: string
+          id: string
+          preferences?: Json
+        }
+        Update: {
+          avatar_url?: string
+          display_name?: string
+          id?: string
+          preferences?: Json
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       submit_cleaning_enquiry: { Args: { payload: Json }; Returns: string }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -206,6 +279,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+    },
   },
 } as const
