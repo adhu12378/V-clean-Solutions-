@@ -20,9 +20,9 @@
 - [x] Add WhatsApp links for +44 7554462594 in navigation, footer and floating contact button
 - [x] Convert the transparent official logo to a dark-mode vector with cyan glow
 - [x] Verify price-free service details, quote flow and WhatsApp links
-- [ ] Save account-free customer enquiries in Lovable Cloud with unique references and private read access
-- [ ] Add header Enquire Now linked to the existing enquiry form
-- [ ] Verify a real submission and database security
-- [ ] Prepare Resend notifications — requires connected Resend account and verified sender
-- [ ] Prepare Google Sheets tracker — requires connected Google account and tracker destination
-- [ ] Website admin dashboard — deferred pending clarification; customers must not need accounts
+- [x] Save account-free customer enquiries in Lovable Cloud with unique references and private read access
+- [x] Add header Enquire Now linked to the existing enquiry form
+- [x] Verify a real submission and database security; remove only the test entry
+- [ ] Resend notifications — blocked: connection declined; needs Resend connection and verified sender address
+- [x] Create and verify automatic Google Sheets customer tracker copy
+- [ ] Website admin dashboard — blocked: needs confirmation of owner-only sign-in and intended admin account; no customer accounts
